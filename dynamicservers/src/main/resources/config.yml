@@ -1,0 +1,31 @@
+api-url: "http://pterodactyl.local"
+api-key: "Z7umYfcyoBe2oJbJvP4SOEol8E5qYCI7GjY33f4lJkV8ImXt"
+
+server-templates:
+  example1:
+    name: "Example 1"
+    max-servers: 3
+    server-settigs:
+      core-details:
+        owner-id: 2
+        name: "{username}`s server"
+      allocation-management:
+        node-id: 1
+        allocations: 1
+      application-feature-limits:
+        backup-limit: 1
+      resource-management:
+        memory: 128
+        swap: 0
+        disk-space: 512
+        block-io-weight: 500
+        cpu-limit: 100
+        cpu-pinning: null #"0-1,3"
+        enable-oom: false
+      egg-id: 1
+      docker-image: "ghcr.io/pterodactyl/yolks:java_17"
+    backup-settings:
+      cronjob-syntax: "*/5 * * *"
+      ignore:
+        - "server.jar"
+        - "/logs"
