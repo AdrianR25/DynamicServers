@@ -1,5 +1,6 @@
 api-url: "http://pterodactyl.local"
-api-key: "Z7umYfcyoBe2oJbJvP4SOEol8E5qYCI7GjY33f4lJkV8ImXt"
+application-api-key: "Z7umYfcyoBe2oJbJvP4SOEol8E5qYCI7GjY33f4lJkV8ImXt"
+user-api-key: "pn6gNa9Fhsa9CfOxZ9qdOLDsivIytg2NDJs9uTewTsDW3bwA"
 
 server-templates:
   example1:
