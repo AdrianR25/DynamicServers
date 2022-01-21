@@ -1,2 +1,3 @@
+[IN DEVELOPMENT]
 # DynamicServers
-Reward players by providing a private server. Ingame.
+Let players have private servers in your network.
