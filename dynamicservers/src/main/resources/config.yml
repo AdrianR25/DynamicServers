@@ -1,10 +1,15 @@
-api-url: "http://pterodactyl.local"
-application-api-key: "Z7umYfcyoBe2oJbJvP4SOEol8E5qYCI7GjY33f4lJkV8ImXt"
-user-api-key: "pn6gNa9Fhsa9CfOxZ9qdOLDsivIytg2NDJs9uTewTsDW3bwA"
+api:
+  url: "http://pterodactyl.local"
+  application-key: "Z7umYfcyoBe2oJbJvP4SOEol8E5qYCI7GjY33f4lJkV8ImXt"
+  user-key: "pn6gNa9Fhsa9CfOxZ9qdOLDsivIytg2NDJs9uTewTsDW3bwA"
+
+allocations:
+  ip: "192.168.1.56"
+  port-range: "25665-25699"
 
 server-templates:
   example1:
-    name: "Example 1"
+    display-name: "Example 1"
     max-servers: 3
     server-settigs:
       core-details:
