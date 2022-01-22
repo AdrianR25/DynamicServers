@@ -1,13 +1,15 @@
 package dev.adrianr.configuration;
 
+import dev.adrianr.common.Server;
+
 public class ServerTemplate {
 
 	private String name;
 	private int maxServers;
-	private ServerSettings serverSettings;
+	private Server serverSettings;
 	private BackupSettings BackupSettings;
 
-	public ServerTemplate(String name, int maxServers, ServerSettings serverSettings,
+	public ServerTemplate(String name, int maxServers, Server serverSettings,
 			dev.adrianr.configuration.BackupSettings backupSettings) {
 		this.name = name;
 		this.maxServers = maxServers;
@@ -31,11 +33,11 @@ public class ServerTemplate {
 		this.maxServers = maxServers;
 	}
 
-	public ServerSettings getServerSettings() {
+	public Server getServerSettings() {
 		return serverSettings;
 	}
 
-	public void setServerSettings(ServerSettings serverSettings) {
+	public void setServerSettings(Server serverSettings) {
 		this.serverSettings = serverSettings;
 	}
 

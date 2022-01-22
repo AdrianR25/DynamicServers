@@ -1,13 +1,13 @@
-package dev.adrianr.configuration;
+package dev.adrianr.common;
 
-public class ServerSettings {
+public class Server {
 
 	private int ownerId, nodeId, allocations, backupLimit, memory,
 			swap, diskSpace, blockIoWeight, cpuLimit, eggId;
 	private String name, dockerImage, cpuPinning;
 	private boolean enableOom;
 
-	public ServerSettings() {
+	public Server() {
 	}
 
 	public int getOwnerId() {
