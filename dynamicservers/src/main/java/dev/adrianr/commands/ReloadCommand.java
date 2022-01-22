@@ -1,5 +1,6 @@
 package dev.adrianr.commands;
 
+import dev.adrianr.DynamicServers;
 import dev.adrianr.configuration.ConfigManager;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.chat.ComponentBuilder;
@@ -7,20 +8,20 @@ import net.md_5.bungee.api.plugin.Command;
 
 public class ReloadCommand extends Command{
 
-	private ConfigManager configManager;
+	private DynamicServers plugin;
 
-	public ReloadCommand(ConfigManager configManager) {
+	public ReloadCommand(DynamicServers plugin) {
 		super("dsreload");
-		this.configManager = configManager;		
+		this.plugin = plugin;		
 	}
 
 	@Override
 	public void execute(CommandSender sender, String[] args) {
 		String message;
-		if (this.configManager.reloadConfig()){
-			message = configManager.getMessage("config-reload-successful", null);
+		if (plugin.getConfigManager().reloadConfig()){
+			message = plugin.getConfigManager().getMessage("config-reload-successful", null);
 		} else {
-			message = configManager.getMessage("config-reload-failed", null);
+			message = plugin.getConfigManager().getMessage("config-reload-failed", null);
 		}
 		sender.sendMessage(new ComponentBuilder(message).create());
 	}

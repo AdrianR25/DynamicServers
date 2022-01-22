@@ -2,7 +2,7 @@ package dev.adrianr.common;
 
 public class Server {
 
-	private int ownerId, nodeId, allocations, backupLimit, memory,
+	private int ownerId, nodeId, allocationLimit, databaseLimit, backupLimit, memory,
 			swap, diskSpace, blockIoWeight, cpuLimit, eggId;
 	private String name, dockerImage, cpuPinning;
 	private boolean enableOom;
@@ -24,14 +24,6 @@ public class Server {
 
 	public void setNodeId(int nodeId) {
 		this.nodeId = nodeId;
-	}
-
-	public int getAllocations() {
-		return allocations;
-	}
-
-	public void setAllocations(int allocations) {
-		this.allocations = allocations;
 	}
 
 	public int getBackupLimit() {
@@ -120,6 +112,22 @@ public class Server {
 
 	public void setEnableOom(boolean enableOom) {
 		this.enableOom = enableOom;
+	}
+
+	public int getAllocationLimit() {
+		return allocationLimit;
+	}
+
+	public void setAllocationLimit(int allocationLimit) {
+		this.allocationLimit = allocationLimit;
+	}
+
+	public int getDatabaseLimit() {
+		return databaseLimit;
+	}
+
+	public void setDatabaseLimit(int databaseLimit) {
+		this.databaseLimit = databaseLimit;
 	}
 
 }

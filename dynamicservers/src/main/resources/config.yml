@@ -15,10 +15,10 @@ server-templates:
       core-details:
         owner-id: 2
         name: "{username}`s server"
-      allocation-management:
         node-id: 1
-        allocations: 1
       application-feature-limits:
+        database-limit: 1
+        allocation-limit: 1
         backup-limit: 1
       resource-management:
         memory: 128
@@ -37,5 +37,11 @@ server-templates:
         - "/logs"
 
 messages:
+  # INGAME
   config-reload-successful: "&aConfiguration reloaded successfully"
   config-reload-failed: "&cThere was an error reloading the configuration"
+
+  # CONSOLE
+  request-403: "Server responded with a 403 - Forbidden. Please check the keys in config.yml"
+  request-404: "Server responded with a 404 - Not found. Please check the URL in config.yml"
+  connection-error-generic: "There was an error while trying to connect to the server. Please check the config.yml"

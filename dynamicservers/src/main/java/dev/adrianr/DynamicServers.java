@@ -19,11 +19,15 @@ public class DynamicServers extends Plugin {
 
         getLogger().log(Level.INFO, "Loading configuration files");
         configManager = new ConfigManager(this);
-        clientEndpoint = new ClientEndpoint(configManager.getConfig().getString("api.url"), configManager.getConfig().getString("api.user-key"));
+        clientEndpoint = new ClientEndpoint(this);
 
         getLogger().log(Level.INFO, "Registering commands");
-        ProxyServer.getInstance().getPluginManager().registerCommand(this, new TestCommand(configManager));
-        ProxyServer.getInstance().getPluginManager().registerCommand(this, new ReloadCommand(configManager));
+        ProxyServer.getInstance().getPluginManager().registerCommand(this, new TestCommand(this));
+        ProxyServer.getInstance().getPluginManager().registerCommand(this, new ReloadCommand(this));
 
     }
+
+    public ConfigManager getConfigManager() {
+        return configManager;
+    }    
 }
