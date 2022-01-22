@@ -130,4 +130,13 @@ public class Server {
 		this.databaseLimit = databaseLimit;
 	}
 
+	@Override
+	public String toString() {
+		return "Server [allocationLimit=" + allocationLimit + ", backupLimit=" + backupLimit + ", blockIoWeight="
+				+ blockIoWeight + ", cpuLimit=" + cpuLimit + ", cpuPinning=" + cpuPinning + ", databaseLimit="
+				+ databaseLimit + ", diskSpace=" + diskSpace + ", dockerImage=" + dockerImage + ", eggId=" + eggId
+				+ ", enableOom=" + enableOom + ", memory=" + memory + ", name=" + name + ", nodeId=" + nodeId
+				+ ", ownerId=" + ownerId + ", swap=" + swap + "]";
+	}	
+
 }

@@ -1,15 +1,11 @@
 package dev.adrianr.http;
 
-import java.io.IOException;
-
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonNull;
 import com.google.gson.JsonObject;
 
-import okhttp3.OkHttpClient;
 import okhttp3.Request;
-import okhttp3.Response;
 
 public class ApiManager {
 
@@ -55,20 +51,15 @@ public class ApiManager {
 	 * @param key a key to authenticate with
 	 * @return a response from a request or null if there was an error
 	 */
-	public static Response makeHttpRequest(String url, String key){
-		OkHttpClient client = new OkHttpClient();
+	public static Request prepareHttpRequest(String url, String key){
         
-		Request request = new Request.Builder()
+		return new Request.Builder()
                 .url(url)
                 .addHeader("Authorization", "Bearer " + key)
                 .addHeader("Accept", "application/json")
                 .build();
 
-        try (Response response = client.newCall(request).execute()) {
-			return response;
-        } catch (IOException e) {
-			return null;
-        }
+        
 	}
 
 }

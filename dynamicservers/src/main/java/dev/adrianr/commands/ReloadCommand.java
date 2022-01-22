@@ -1,7 +1,6 @@
 package dev.adrianr.commands;
 
 import dev.adrianr.DynamicServers;
-import dev.adrianr.configuration.ConfigManager;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.plugin.Command;
