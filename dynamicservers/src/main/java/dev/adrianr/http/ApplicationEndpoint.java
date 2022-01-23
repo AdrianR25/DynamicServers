@@ -2,6 +2,8 @@ package dev.adrianr.http;
 
 import java.io.IOException;
 
+import com.google.gson.JsonElement;
+import com.google.gson.JsonNull;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonSyntaxException;
@@ -45,27 +47,43 @@ public class ApplicationEndpoint {
 				try {
 					json = new JsonParser().parse(response.body().string()).getAsJsonObject();
 				} catch (JsonSyntaxException | IOException e) {
+					e.printStackTrace();
 					return null;
 				}
 
-				server.setOwnerId(ApiManager.getJsonElement(json, "attributes.user").getAsInt());
-				server.setName(ApiManager.getJsonElement(json, "attributes.name").getAsString());
-				server.setNodeId(ApiManager.getJsonElement(json, "attributes.node").getAsInt());
+				JsonElement ownerId = ApiManager.getJsonElement(json, "attributes.user");
+				server.setOwnerId(ownerId.isJsonNull() ? null : ownerId.getAsInt());
+				JsonElement name = ApiManager.getJsonElement(json, "attributes.name");
+				server.setName(name.isJsonNull() ? null : name.getAsString());
+				JsonElement nodeId = ApiManager.getJsonElement(json, "attributes.node");
+				server.setNodeId(nodeId.isJsonNull() ? null : nodeId.getAsInt());
 
 				server.setDatabaseLimit(ApiManager.getJsonElement(json, "attributes.feature_limits.databases").getAsInt());
-				server.setAllocationLimit(ApiManager.getJsonElement(json, "attributes.feature_limits.allocations").getAsInt());
-				server.setBackupLimit(ApiManager.getJsonElement(json, "attributes.feature_limits.backups").getAsInt());
+				JsonElement allocationLimit = ApiManager.getJsonElement(json, "attributes.feature_limits.allocations");
+				server.setAllocationLimit(allocationLimit.isJsonNull() ? null : allocationLimit.getAsInt());
+				JsonElement backupLimit = ApiManager.getJsonElement(json, "attributes.feature_limits.backups");
+				server.setBackupLimit(backupLimit.isJsonNull() ? null : backupLimit.getAsInt());
 
-				server.setMemory(ApiManager.getJsonElement(json, "attributes.limits.memory").getAsInt());
-				server.setSwap(ApiManager.getJsonElement(json, "attributes.limits.swap").getAsInt());
-				server.setDiskSpace(ApiManager.getJsonElement(json, "attributes.limits.disk").getAsInt());
-				server.setBlockIoWeight(ApiManager.getJsonElement(json, "attributes.limits.io").getAsInt());
-				server.setCpuLimit(ApiManager.getJsonElement(json, "attributes.limits.cpu").getAsInt());
-				server.setCpuPinning(ApiManager.getJsonElement(json, "attributes.limits.threads").getAsString());
-				server.setEnableOom(!ApiManager.getJsonElement(json, "attributes.limits.oom_disabled").getAsBoolean());
+				JsonElement memory = ApiManager.getJsonElement(json, "attributes.limits.memory");
+				server.setMemory(memory.isJsonNull() ? null : memory.getAsInt());
+				JsonElement swap = ApiManager.getJsonElement(json, "attributes.limits.swap");
+				server.setSwap(swap.isJsonNull() ? null : swap.getAsInt());
+				JsonElement diskSpace = ApiManager.getJsonElement(json, "attributes.limits.disk");
+				server.setDiskSpace(diskSpace.isJsonNull() ? null : diskSpace.getAsInt());
+				JsonElement blockIoWeight = ApiManager.getJsonElement(json, "attributes.limits.io");
+				server.setBlockIoWeight(blockIoWeight.isJsonNull() ? null : blockIoWeight.getAsInt());
+				JsonElement cpuLimit = ApiManager.getJsonElement(json, "attributes.limits.cpu");
+				server.setCpuLimit(cpuLimit.isJsonNull() ? null : cpuLimit.getAsInt());
+				
+				JsonElement cpuPinning = ApiManager.getJsonElement(json, "attributes.limits.threads");
+				server.setCpuPinning(cpuPinning.isJsonNull() ? null : cpuPinning.getAsString());
+				JsonElement enableOom = ApiManager.getJsonElement(json, "attributes.limits.oom_disabled");
+				server.setEnableOom(enableOom.isJsonNull() ? null : !enableOom.getAsBoolean());
 
-				server.setEggId(ApiManager.getJsonElement(json, "attributes.egg").getAsInt());
-				server.setDockerImage(ApiManager.getJsonElement(json, "attributes.container.image").getAsString());
+				JsonElement eggId = ApiManager.getJsonElement(json, "attributes.egg");
+				server.setEggId(eggId.isJsonNull() ? null : eggId.getAsInt());
+				JsonElement dockerImage = ApiManager.getJsonElement(json, "attributes.container.image");
+				server.setDockerImage(dockerImage.isJsonNull() ? null : dockerImage.getAsString());
 
 				return server;
 
@@ -79,7 +97,7 @@ public class ApplicationEndpoint {
 
 			return null;
         } catch (IOException e) {
-
+			e.printStackTrace();
 			return null;
 
         }

@@ -20,7 +20,7 @@ public class TestCommand extends Command {
         
         sender.sendMessage(new ComponentBuilder("Executing test command").create());
 
-        Server server = plugin.getApplicationEndpoint().getServerById(1);
+        Server server = plugin.getApplicationEndpoint().getServerById(Integer.valueOf(args[0]));
         if (server == null) {
             sender.sendMessage(new ComponentBuilder("Couldn't get server").create());
             return;

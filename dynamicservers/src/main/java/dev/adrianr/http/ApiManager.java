@@ -57,9 +57,7 @@ public class ApiManager {
                 .url(url)
                 .addHeader("Authorization", "Bearer " + key)
                 .addHeader("Accept", "application/json")
-                .build();
-
-        
+                .build();        
 	}
 
 }
