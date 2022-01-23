@@ -3,8 +3,10 @@ package dev.adrianr.configuration;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.ObjectInputFilter.Config;
 import java.nio.file.Files;
 
+import dev.adrianr.common.Server;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.plugin.Plugin;
 import net.md_5.bungee.config.Configuration;
@@ -56,6 +58,21 @@ public class ConfigManager {
 		return finalMessage;
 	}
 
+	public ServerTemplate getServerTemplate(String templateName) {
+
+		Configuration templateConfig = getConfig().getSection("server-templates." + templateName);
+		String displayName = templateConfig.getString("display-name");
+		int maxServers = templateConfig.getInt("max-servers");
+
+		Server serverSettings = getServerSettingsFromConfig(templateConfig.getSection("server-settings"));
+		BackupSettings backupSettings = getBackupSettingsFromConfig(templateConfig.getSection("backup-settings"));
+
+		ServerTemplate template = new ServerTemplate(displayName, maxServers, serverSettings, backupSettings);
+
+		return template;
+
+	}
+
 	private boolean loadConfig(){
 		try {
 			this.configuration = ConfigurationProvider.getProvider(YamlConfiguration.class).load(new File(plugin.getDataFolder(), "config.yml"));
@@ -79,6 +96,43 @@ public class ConfigManager {
 				e.printStackTrace();
 			}
 		}
+	}
+
+	private Server getServerSettingsFromConfig(Configuration serverSettingsConfig) {
+
+		Server server = new Server();
+
+		server.setOwnerId(serverSettingsConfig.getInt("core-details.owner-id"));
+		server.setName(serverSettingsConfig.getString("core-details.name"));
+		server.setNodeId(serverSettingsConfig.getInt("core-details.node-id"));
+		
+		server.setDatabaseLimit(serverSettingsConfig.getInt("application-feature-limits.database-limit"));
+		server.setAllocationLimit(serverSettingsConfig.getInt("application-feature-limits.allocation-limit"));
+		server.setBackupLimit(serverSettingsConfig.getInt("application-feature-limits.backup-limit"));
+
+		server.setMemory(serverSettingsConfig.getInt("resource-management.memory"));
+		server.setSwap(serverSettingsConfig.getInt("resource-management.swap"));
+		server.setDiskSpace(serverSettingsConfig.getInt("resource-management.disk-space"));
+		server.setBlockIoWeight(serverSettingsConfig.getInt("resource-management.block-io-weight"));
+		server.setCpuLimit(serverSettingsConfig.getInt("resource-management.cpu-limit"));
+		server.setCpuPinning(serverSettingsConfig.getString("resource-management.memory"));
+		server.setEnableOom(serverSettingsConfig.getBoolean("resource-management.enable-oom"));
+
+		server.setEggId(serverSettingsConfig.getInt("egg-id"));
+		server.setDockerImage(serverSettingsConfig.getString("docker-image"));
+
+
+		return server;
+	}
+
+	private BackupSettings getBackupSettingsFromConfig(Configuration backupSettingsConfig) {
+
+		String cronjobSyntax = backupSettingsConfig.getString("cronjob-syntax");
+		String[] ignore = {}; 
+		backupSettingsConfig.getStringList("cronjob-syntax").toArray(ignore); 
+		BackupSettings backup = new BackupSettings(cronjobSyntax, ignore);
+
+		return backup;
 	}
 
 }

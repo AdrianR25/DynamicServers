@@ -51,7 +51,22 @@ public class ApiManager {
 	 * @param key a key to authenticate with
 	 * @return a response from a request or null if there was an error
 	 */
-	public static Request prepareHttpRequest(String url, String key){
+	public static Request prepareGetHttpRequest(String url, String key){
+        
+		return new Request.Builder()
+                .url(url)
+                .addHeader("Authorization", "Bearer " + key)
+                .addHeader("Accept", "application/json")
+                .build();        
+	}
+
+	/**
+	 *
+	 * @param url to request to
+	 * @param key a key to authenticate with
+	 * @return a response from a request or null if there was an error
+	 */
+	public static Request preparePostHttpRequest(String url, String key){
         
 		return new Request.Builder()
                 .url(url)
