@@ -41,6 +41,7 @@ messages:
   # INGAME
   config-reload-successful: "&aConfiguration reloaded successfully"
   config-reload-failed: "&cThere was an error reloading the configuration"
+  config-template-not-exists: "&cThat template doesn't exist"
 
   # CONSOLE
   request-403: "Server responded with a 403 - Forbidden. Please check the keys in config.yml"

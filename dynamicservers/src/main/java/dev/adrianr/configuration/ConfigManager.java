@@ -3,9 +3,10 @@ package dev.adrianr.configuration;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.ObjectInputFilter.Config;
 import java.nio.file.Files;
+import java.util.List;
 
+import dev.adrianr.common.Backup;
 import dev.adrianr.common.Server;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.plugin.Plugin;
@@ -61,11 +62,14 @@ public class ConfigManager {
 	public ServerTemplate getServerTemplate(String templateName) {
 
 		Configuration templateConfig = getConfig().getSection("server-templates." + templateName);
+		
+		if (templateConfig.getKeys().size() == 0) return null;
+		
 		String displayName = templateConfig.getString("display-name");
 		int maxServers = templateConfig.getInt("max-servers");
 
 		Server serverSettings = getServerSettingsFromConfig(templateConfig.getSection("server-settings"));
-		BackupSettings backupSettings = getBackupSettingsFromConfig(templateConfig.getSection("backup-settings"));
+		Backup backupSettings = getBackupSettingsFromConfig(templateConfig.getSection("backup-settings"));
 
 		ServerTemplate template = new ServerTemplate(displayName, maxServers, serverSettings, backupSettings);
 
@@ -120,17 +124,16 @@ public class ConfigManager {
 
 		server.setEggId(serverSettingsConfig.getInt("egg-id"));
 		server.setDockerImage(serverSettingsConfig.getString("docker-image"));
-
+		server.setStartupCommand(serverSettingsConfig.getString("startup-command"));
 
 		return server;
 	}
 
-	private BackupSettings getBackupSettingsFromConfig(Configuration backupSettingsConfig) {
+	private Backup getBackupSettingsFromConfig(Configuration backupSettingsConfig) {
 
 		String cronjobSyntax = backupSettingsConfig.getString("cronjob-syntax");
-		String[] ignore = {}; 
-		backupSettingsConfig.getStringList("cronjob-syntax").toArray(ignore); 
-		BackupSettings backup = new BackupSettings(cronjobSyntax, ignore);
+		List<String> ignore = backupSettingsConfig.getStringList("ignore");
+		Backup backup = new Backup(cronjobSyntax, ignore);
 
 		return backup;
 	}

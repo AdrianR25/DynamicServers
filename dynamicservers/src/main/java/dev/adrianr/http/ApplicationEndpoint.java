@@ -3,7 +3,6 @@ package dev.adrianr.http;
 import java.io.IOException;
 
 import com.google.gson.JsonElement;
-import com.google.gson.JsonNull;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonSyntaxException;
@@ -72,6 +71,7 @@ public class ApplicationEndpoint {
 
 				server.setEggId(ApiManager.getJsonElement(json, "attributes.egg").getAsInt());
 				server.setDockerImage(ApiManager.getJsonElement(json, "attributes.container.image").getAsString());
+				server.setStartupCommand(ApiManager.getJsonElement(json, "attributes.container.startup_command").getAsString());
 
 				return server;
 

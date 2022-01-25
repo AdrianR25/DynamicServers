@@ -4,7 +4,7 @@ public class Server {
 
 	private int ownerId, nodeId, allocationLimit, databaseLimit, backupLimit, memory,
 			swap, diskSpace, blockIoWeight, cpuLimit, eggId;
-	private String name, dockerImage, cpuPinning;
+	private String name, dockerImage, cpuPinning, startupCommand;
 	private boolean enableOom;
 
 	public Server() {
@@ -128,6 +128,14 @@ public class Server {
 
 	public void setDatabaseLimit(int databaseLimit) {
 		this.databaseLimit = databaseLimit;
+	}
+
+	public String getStartupCommand() {
+		return startupCommand;
+	}
+
+	public void setStartupCommand(String startupCommand) {
+		this.startupCommand = startupCommand;
 	}
 
 	@Override

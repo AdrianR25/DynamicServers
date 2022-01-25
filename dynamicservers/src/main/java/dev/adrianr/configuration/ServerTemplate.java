@@ -1,5 +1,6 @@
 package dev.adrianr.configuration;
 
+import dev.adrianr.common.Backup;
 import dev.adrianr.common.Server;
 
 public class ServerTemplate {
@@ -7,14 +8,14 @@ public class ServerTemplate {
 	private String displayName;
 	private int maxServers;
 	private Server serverSettings;
-	private BackupSettings BackupSettings;
+	private Backup backup;
 
 	public ServerTemplate(String displayName, int maxServers, Server serverSettings,
-			dev.adrianr.configuration.BackupSettings backupSettings) {
+			Backup backup) {
 		this.displayName = displayName;
 		this.maxServers = maxServers;
 		this.serverSettings = serverSettings;
-		BackupSettings = backupSettings;
+		this.backup = backup;
 	}
 
 	public String getDisplayName() {
@@ -41,12 +42,20 @@ public class ServerTemplate {
 		this.serverSettings = serverSettings;
 	}
 
-	public BackupSettings getBackupSettings() {
-		return BackupSettings;
+	public Backup getBackupSettings() {
+		return backup;
 	}
 
-	public void setBackupSettings(BackupSettings backupSettings) {
-		BackupSettings = backupSettings;
+	public void setBackupSettings(Backup backupSettings) {
+		backup = backupSettings;
 	}
+
+	@Override
+	public String toString() {
+		return "ServerTemplate [backup=" + backup + ", displayName=" + displayName + ", maxServers=" + maxServers
+				+ ", serverSettings=" + serverSettings + "]";
+	}
+
+	
 
 }
