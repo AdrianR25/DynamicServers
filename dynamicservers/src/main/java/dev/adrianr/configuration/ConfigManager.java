@@ -66,12 +66,14 @@ public class ConfigManager {
 		if (templateConfig.getKeys().size() == 0) return null;
 		
 		String displayName = templateConfig.getString("display-name");
+		String allocationIp = templateConfig.getString("allocations.ip");
+		String allocationPorts = templateConfig.getString("allocations.port-range");
 		int maxServers = templateConfig.getInt("max-servers");
 
 		Server serverSettings = getServerSettingsFromConfig(templateConfig.getSection("server-settings"));
 		Backup backupSettings = getBackupSettingsFromConfig(templateConfig.getSection("backup-settings"));
 
-		ServerTemplate template = new ServerTemplate(displayName, maxServers, serverSettings, backupSettings);
+		ServerTemplate template = new ServerTemplate(displayName, allocationIp, allocationPorts, maxServers, serverSettings, backupSettings);
 
 		return template;
 

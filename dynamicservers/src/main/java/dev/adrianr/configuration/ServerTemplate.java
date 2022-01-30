@@ -5,14 +5,16 @@ import dev.adrianr.common.Server;
 
 public class ServerTemplate {
 
-	private String displayName;
+	private String displayName, allocationIp, allocationPorts;
 	private int maxServers;
 	private Server serverSettings;
 	private Backup backup;
 
-	public ServerTemplate(String displayName, int maxServers, Server serverSettings,
+	public ServerTemplate(String displayName, String allocationIp, String allocationPorts, int maxServers, Server serverSettings,
 			Backup backup) {
 		this.displayName = displayName;
+		this.allocationIp = allocationIp;
+		this.allocationPorts = allocationPorts;
 		this.maxServers = maxServers;
 		this.serverSettings = serverSettings;
 		this.backup = backup;
@@ -48,6 +50,22 @@ public class ServerTemplate {
 
 	public void setBackupSettings(Backup backupSettings) {
 		backup = backupSettings;
+	}
+
+	public String getAllocationIp() {
+		return allocationIp;
+	}
+
+	public void setAllocationIp(String allocationIp) {
+		this.allocationIp = allocationIp;
+	}
+
+	public String getAllocationPorts() {
+		return allocationPorts;
+	}
+
+	public void setAllocationPorts(String allocationPorts) {
+		this.allocationPorts = allocationPorts;
 	}
 
 	@Override

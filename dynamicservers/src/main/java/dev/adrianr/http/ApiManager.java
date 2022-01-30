@@ -5,7 +5,9 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonNull;
 import com.google.gson.JsonObject;
 
+import okhttp3.MediaType;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 
 public class ApiManager {
 
@@ -63,15 +65,31 @@ public class ApiManager {
 	/**
 	 *
 	 * @param url to request to
+	 * @return a response from a request or null if there was an error
+	 */
+	public static Request prepareGetHttpRequest(String url){
+
+		return new Request.Builder()
+                .url(url)
+                .addHeader("Accept", "application/json")
+                .build();        
+	}
+
+	/**
+	 *
+	 * @param url to request to
 	 * @param key a key to authenticate with
 	 * @return a response from a request or null if there was an error
 	 */
-	public static Request preparePostHttpRequest(String url, String key){
+	public static Request preparePostHttpRequest(String url, String key, String body){
         
+		RequestBody requestBody = RequestBody.create(body, MediaType.parse("application/json"));
+
 		return new Request.Builder()
                 .url(url)
                 .addHeader("Authorization", "Bearer " + key)
                 .addHeader("Accept", "application/json")
+				.post(requestBody)
                 .build();        
 	}
 

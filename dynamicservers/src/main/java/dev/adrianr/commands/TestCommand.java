@@ -1,8 +1,12 @@
 package dev.adrianr.commands;
 
+import java.util.ArrayList;
+
 import dev.adrianr.DynamicServers;
+import dev.adrianr.common.Allocation;
 import dev.adrianr.common.Server;
 import dev.adrianr.configuration.ServerTemplate;
+import dev.adrianr.http.MojangEndpoint;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.plugin.Command;
@@ -20,14 +24,17 @@ public class TestCommand extends Command {
     public void execute(CommandSender sender, String[] args) {
         
         sender.sendMessage(new ComponentBuilder("Executing test command").create());
+        
+        sender.sendMessage(new ComponentBuilder("Test command completed").create());
 
+        /*
         ServerTemplate template = plugin.getConfigManager().getServerTemplate(args[0]);
         if (template == null) {
             String message = plugin.getConfigManager().getMessage("config-template-not-exists", null);
             sender.sendMessage(new ComponentBuilder(message).create());
         } else {
             sender.sendMessage(new ComponentBuilder(template.toString()).create());
-        }
+        }*/
 
 
         /*
@@ -38,4 +45,7 @@ public class TestCommand extends Command {
         }
         sender.sendMessage(new ComponentBuilder(server.toString()).create());*/
     }
+
+    
+
 }
